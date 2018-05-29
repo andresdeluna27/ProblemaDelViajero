@@ -59,10 +59,51 @@ class Nodo(object):
         return aux
         #file.write(""+str(aux))
         #file.write("\n")
-        #print('distancia:  '+lista.getDist())
+        #print('distancia:  '+self.getDist())
         #file.write('distancia:  '+lista.getDist())   
         #file.write("\n")
         #self.getList()
+
+    def cruce(self,lista):#funcion que hace los cruzamientos de los nodos
+        i=1
+        segAcomodo=[]
+        k=0
+        while k<26:
+            segAcomodo.append(int(1))
+            k+=1
+        segAcomodo[1]=self.acomodo[1]
+        paro=True
+        aux=self.acomodo[1]
+        aux2=lista[1]
+        ind=0
+        while (paro):#primera parte del ciclo
+            ind=self.acomodo.index(aux2)
+            segAcomodo[ind]=self.acomodo[ind]
+            aux2=lista[ind]
+            if ind==24 or aux==aux2:
+                paro=False
+        i=0
+        while i<25:#el relleno con los faltantes
+            if segAcomodo[i]==1:
+                if lista[i]==aux:
+                    segAcomodo[i]=aux2
+                else:
+                    segAcomodo[i]=lista[i]
+            i+=1
+        return segAcomodo
+
+    def cambioAcomodo(self,lista,city): #cambia el orden de las ciudades despues del cruce
+        self.acomodo=lista
+        i=0
+        while i<25:
+            self.ciudades[i]=(city[(self.acomodo[i])-1])
+            i+=1
+        self.distancia=0#se setea la longitud en cero 
+        self.longitud()#se vuelve a calcular con el nuevo acomodo
+        
+
+    def getAcomodo(self): #sirve para pasar como argumento a la funcion cruce
+        return self.acomodo
             
             
 nodos=[]
@@ -77,7 +118,7 @@ file.write("\n")
 while (i<100):
     lista.append(Nodo(nodos))
     lista[i].cromosoma=i+1
-    time.sleep(0.03)
+    #time.sleep(0.03)
     file.write("{:<15} {:<15} {:<100} {:<150}".format(str(lista[i].generacion),str(lista[i].cromosoma),str(lista[i].printOrden()),str(lista[i].getDist())))
     file.write("\n")
     #print('distancia:  '+lista[i].getDist())
@@ -85,9 +126,55 @@ while (i<100):
 
 lista = sorted(lista, key=lambda nodo: nodo.distancia)
 i=0
+lista2=[]
+nuevaGen=[]
 #print("----------------ordenados")
-while (i<100):
-    #lista[i].printOrden(lista[i])
-    #print('distancia:  '+lista[i].getDist())
+while(i<50):
+    #print(str(lista[i].getDist()))
     i+=1
+print('--------------------------------')
+i=0
+while (i<50):
+    lista2.append(lista[i])
+    i+=1
+nuevaGen=lista
+r=0
+
+#print('--------------------------------')
+#print(lista2[0].getAcomodo())
+#print(lista2[0].getDist())
+#print(lista2[1].getAcomodo())
+#print(lista2[1].getDist())
+#print(lista2[0].cruce(lista2[1].getAcomodo()))
+#aux=lista2[0]
+#aux.cambioAcomodo(lista2[0].cruce(lista2[1].getAcomodo()),nodos)
+#print(aux.getAcomodo())
+#print(aux.getDist())
+#print('--------------------------------')
+
+#for i in range(50):
+    #for k in range(2):
+        #if i==48:
+            #if k!=1:
+                #nuevaGen[r].cambioAcomodo(lista2[i].cruce(lista2[49].getAcomodo()),nodos)
+            #else:
+                #nuevaGen[r].cambioAcomodo(lista2[i].cruce(lista2[0].getAcomodo()),nodos)
+        #elif i==49:
+            #if k!=1:
+                #nuevaGen[r].cambioAcomodo(lista2[i].cruce(lista2[0].getAcomodo()),nodos)
+            #else:
+                #nuevaGen[r].cambioAcomodo(lista2[i].cruce(lista2[1].getAcomodo()),nodos)
+        #else:
+            #nuevaGen[r].cambioAcomodo(lista2[i].cruce(lista2[(i+k+1)].getAcomodo()),nodos)
+        #r+=1
+for i in range(47):
+    for k in range(2):
+        nuevaGen[r].cambioAcomodo(lista2[i].cruce(lista2[(i+k+1)].getAcomodo()),nodos)
+        r+=1
+nuevaGen = sorted(nuevaGen, key=lambda nodo: nodo.distancia)
+i=0
+while (i<100):
+    print(str(nuevaGen[i].getDist()))
+    i+=1
+
 file.close();

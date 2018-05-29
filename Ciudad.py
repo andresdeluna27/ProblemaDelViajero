@@ -1,6 +1,7 @@
 import random
 import math
 class Ciudad(object):
+    num=0
     def __init__(self,numero):
         self.num=numero
         self.x=None
@@ -88,6 +89,9 @@ class Ciudad(object):
 
     def impr(self):
         return str("x: "+str(self.x)+" y: "+str(self.y))
+
+    def getNum():
+        return int(self.num)
         
         
         
