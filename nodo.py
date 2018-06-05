@@ -175,7 +175,7 @@ cont=0
         else:
             nuevaGen[r].cambioAcomodo(lista2[i].cruce(lista2[(i+k+1)].getAcomodo()),nodos)
         r+=1'''
-r=0
+'''r=0
 for i in range(0,50,2):
     nuevaGen[r].cambioAcomodo(lista2[i].cruce(lista2[(i+1)].getAcomodo()),nodos)
     r+=1
@@ -212,7 +212,90 @@ while i<25:
         nuevaGen[r].cambioAcomodo(lista2[i].cruce(lista2[(k)].getAcomodo()),nodos)
         k+=3
         r+=1
+    i+=1'''
+
+r=0
+for i in range(0,50,2):
+    nuevaGen[r].cambioAcomodo(lista2[i].cruce(lista2[(i+1)].getAcomodo()),nodos)
+    r+=1
+i=0
+k=0
+cont=0
+while cont<25:
+    '''if (i<=47):
+        nuevaGen[r].cambioAcomodo(lista2[i].cruce(lista2[(i+2)].getAcomodo()),nodos)
+        r+=1
+    else:
+        nuevaGen[r].cambioAcomodo(lista2[i].cruce(lista2[(k)].getAcomodo()),nodos)
+        k+=1
+        r+=1
     i+=1
+    if (i<=47):
+        nuevaGen[r].cambioAcomodo(lista2[i].cruce(lista2[(i+2)].getAcomodo()),nodos)
+        r+=1
+    else:
+        nuevaGen[r].cambioAcomodo(lista2[i].cruce(lista2[(k)].getAcomodo()),nodos)
+        k+=1
+        r+=1'''
+    for n in range (0,2):
+        if (i<=47):
+            nuevaGen[r].cambioAcomodo(lista2[i].cruce(lista2[(i+2)].getAcomodo()),nodos)
+            r+=1
+            cont+=1
+            if cont>=25:
+                break
+        else:
+            nuevaGen[r].cambioAcomodo(lista2[i].cruce(lista2[(k)].getAcomodo()),nodos)
+            k+=1
+            r+=1
+            cont+=1
+            if cont>=25:
+                break
+        i+=1
+    i+=2
+    #i+=2
+    
+k=0
+i=0
+cont=0
+while cont<25:
+    for n in range (0,3):
+        if (i<=46):
+            nuevaGen[r].cambioAcomodo(lista2[i].cruce(lista2[(i+3)].getAcomodo()),nodos)
+            r+=1
+            cont+=1
+            if cont>=25:
+                break
+        else:
+            nuevaGen[r].cambioAcomodo(lista2[i].cruce(lista2[(k)].getAcomodo()),nodos)
+            k+=1
+            r+=1
+            cont+=1
+            if cont>=25:
+                break
+        i+=1
+    i+=3
+    
+k=0
+i=0
+cont=0
+while cont<25:
+    for n in range (0,4):
+        if (i<=45):
+            nuevaGen[r].cambioAcomodo(lista2[i].cruce(lista2[(i+4)].getAcomodo()),nodos)
+            r+=1
+            cont+=1
+            if cont>=25:
+                break
+        else:
+            nuevaGen[r].cambioAcomodo(lista2[i].cruce(lista2[(k)].getAcomodo()),nodos)
+            k+=1
+            r+=1
+            cont+=1
+            if cont>=25:
+                break
+        i+=1
+    i+=4
 
     
 
