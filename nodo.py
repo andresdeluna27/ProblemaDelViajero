@@ -106,8 +106,15 @@ class Nodo(object):
 
     def getAcomodo(self): #sirve para pasar como argumento a la funcion cruce
         return self.acomodo
+
+    def mutacion(self,num1,num2):
+        aux=self.acomodo[num1]
+        self.acomodo[num1]=self.acomodo[num2]
+        self.acomodo[num2]=aux
+
+    
             
-            
+#se crean los primeros 100          
 nodos=[]
 i=1
 while (i<26):
@@ -125,13 +132,14 @@ while (i<100):
     file.write("\n")
     #print('distancia:  '+lista[i].getDist())
     i+=1
-
+#acomodo de los 100 primeros
 lista = sorted(lista, key=lambda nodo: nodo.distancia)
 i=0
 lista2=[]
 nuevaGen=[]
 print("----------------ordenados")
 file.write("\n")
+#imprime los primeros 50
 while(i<50):
     file.write("{:<15} {:<15} {:<100} {:<150}".format(str(lista[i].generacion),str(lista[i].cromosoma),str(lista[i].printOrden(1)),str(lista[i].getDist())))
     file.write("\n")
@@ -139,82 +147,16 @@ while(i<50):
     i+=1
 print('--------------------------------')
 i=0
+#copiamos los 50 mejores
 while (i<50):
     lista2.append(lista[i])
     i+=1
 #nuevaGen=lista
 #lista2=copy.deepcopy(lista)
 nuevaGen=copy.deepcopy(lista)
-
+#empieza el cruce
 r=0
 cont=0
-#print('--------------------------------')
-#print(lista2[0].getAcomodo())
-#print(lista2[0].getDist())
-#print(lista2[1].getAcomodo())
-#print(lista2[1].getDist())
-#print(lista2[0].cruce(lista2[1].getAcomodo()))
-#aux=lista2[0]
-#aux.cambioAcomodo(lista2[0].cruce(lista2[1].getAcomodo()),nodos)
-#print(aux.getAcomodo())
-#print(aux.getDist())
-#print('--------------------------------')
-
-'''for i in range(1,50,2):
-    for k in range(2):
-        if i==48:
-            if k!=1:
-                nuevaGen[r].cambioAcomodo(lista2[i].cruce(lista2[49].getAcomodo()),nodos)
-            else:
-                nuevaGen[r].cambioAcomodo(lista2[i].cruce(lista2[0].getAcomodo()),nodos)
-        elif i==49:
-            if k!=1:
-                nuevaGen[r].cambioAcomodo(lista2[i].cruce(lista2[0].getAcomodo()),nodos)
-            else:
-                nuevaGen[r].cambioAcomodo(lista2[i].cruce(lista2[1].getAcomodo()),nodos)
-        else:
-            nuevaGen[r].cambioAcomodo(lista2[i].cruce(lista2[(i+k+1)].getAcomodo()),nodos)
-        r+=1'''
-'''r=0
-for i in range(0,50,2):
-    nuevaGen[r].cambioAcomodo(lista2[i].cruce(lista2[(i+1)].getAcomodo()),nodos)
-    r+=1
-i=0
-k=0
-while i<25:
-    if (i<=47):
-        nuevaGen[r].cambioAcomodo(lista2[i].cruce(lista2[(i+2)].getAcomodo()),nodos)
-        r+=1
-    else:
-        nuevaGen[r].cambioAcomodo(lista2[i].cruce(lista2[(k)].getAcomodo()),nodos)
-        k+=1
-        r+=1
-    i+=1
-k=0
-i=0
-while i<25:
-    if (i<=46):
-        nuevaGen[r].cambioAcomodo(lista2[i].cruce(lista2[(i+3)].getAcomodo()),nodos)
-        r+=1
-        print(str(r))
-    else:
-        nuevaGen[r].cambioAcomodo(lista2[i].cruce(lista2[(k)].getAcomodo()),nodos)
-        k+=2
-        r+=1
-    i+=1
-k=0
-i=0
-while i<25:
-    if (i<=45):
-        nuevaGen[r].cambioAcomodo(lista2[i].cruce(lista2[(i+4)].getAcomodo()),nodos)
-        r+=1
-    else:
-        nuevaGen[r].cambioAcomodo(lista2[i].cruce(lista2[(k)].getAcomodo()),nodos)
-        k+=3
-        r+=1
-    i+=1'''
-
-r=0
 for i in range(0,50,2):
     nuevaGen[r].cambioAcomodo(lista2[i].cruce(lista2[(i+1)].getAcomodo()),nodos)
     r+=1
@@ -222,21 +164,6 @@ i=0
 k=0
 cont=0
 while cont<25:
-    '''if (i<=47):
-        nuevaGen[r].cambioAcomodo(lista2[i].cruce(lista2[(i+2)].getAcomodo()),nodos)
-        r+=1
-    else:
-        nuevaGen[r].cambioAcomodo(lista2[i].cruce(lista2[(k)].getAcomodo()),nodos)
-        k+=1
-        r+=1
-    i+=1
-    if (i<=47):
-        nuevaGen[r].cambioAcomodo(lista2[i].cruce(lista2[(i+2)].getAcomodo()),nodos)
-        r+=1
-    else:
-        nuevaGen[r].cambioAcomodo(lista2[i].cruce(lista2[(k)].getAcomodo()),nodos)
-        k+=1
-        r+=1'''
     for n in range (0,2):
         if (i<=47):
             nuevaGen[r].cambioAcomodo(lista2[i].cruce(lista2[(i+2)].getAcomodo()),nodos)
@@ -302,10 +229,11 @@ while cont<25:
 file.write("\n")
 #nuevaGen = sorted(nuevaGen, key=lambda nodo: nodo.distancia)
 i=0
+file.write("sin ordenar-----------------------------------------\n")
 while (i<100):
     nuevaGen[i].cromosoma=i+1
     nuevaGen[i].generacion=nuevaGen[i].generacion+1
-    print(str(nuevaGen[i].printOrden(1))+" "+str(nuevaGen[i].getDist()))
+    #print(str(nuevaGen[i].printOrden(1))+" "+str(nuevaGen[i].getDist()))
     file.write("{:<15} {:<15} {:<100} {:<150}".format(str(nuevaGen[i].generacion),str(nuevaGen[i].cromosoma),str(nuevaGen[i].printOrden(1)),str(nuevaGen[i].getDist())))
     file.write("\n")
     #nuevaGen[i].cambioAcomodo(lista2[uno[i]].cruce(lista2[dos[i]].getAcomodo()),nodos)
@@ -313,13 +241,132 @@ while (i<100):
     i+=1
 
 file.write("\n")
+#ordenacion de nueva generacion
 nuevaGen = sorted(nuevaGen, key=lambda nodo: nodo.distancia)
 i=0
+file.write("ordenados-----------------------------------------\n")
 while (i<100):
-    print(str(nuevaGen[i].printOrden(1))+" "+str(nuevaGen[i].getDist()))
+    #print(str(nuevaGen[i].printOrden(1))+" "+str(nuevaGen[i].getDist()))
     file.write("{:<15} {:<15} {:<100} {:<150}".format(str(nuevaGen[i].generacion),str(nuevaGen[i].cromosoma),str(nuevaGen[i].printOrden(1)),str(nuevaGen[i].getDist())))
     file.write("\n")
     i+=1
+
+#comienzan las mutacuones
+aux=nuevaGen[0].mutacion(4,9)
+#masNodos=deepcopy(lista)
+lista2=[]
+i=0
+while (i<50):
+    lista2.append(nuevaGen[i])
+    i+=1
+w=0
+while w<99:
+
+    r=0
+    cont=0
+    i=0
+    for j in range(0,50,2):
+        nuevaGen[r].cambioAcomodo(lista2[j].cruce(lista2[(j+1)].getAcomodo()),nodos)
+        r+=1
+    i=0
+    k=0
+    cont=0
+    while cont<25:
+        for n in range (0,2):
+            if (i<=47):
+                nuevaGen[r].cambioAcomodo(lista2[i].cruce(lista2[(i+2)].getAcomodo()),nodos)
+                r+=1
+                cont+=1
+                if cont>=25:
+                    break
+            else:
+                nuevaGen[r].cambioAcomodo(lista2[i].cruce(lista2[(k)].getAcomodo()),nodos)
+                k+=1
+                r+=1
+                cont+=1
+                if cont>=25:
+                    break
+            i+=1
+        i+=2
+        #i+=2
+    
+    k=0
+    i=0
+    cont=0
+    while cont<25:
+        for n in range (0,3):
+            if (i<=46):
+                nuevaGen[r].cambioAcomodo(lista2[i].cruce(lista2[(i+3)].getAcomodo()),nodos)
+                r+=1
+                cont+=1
+                if cont>=25:
+                    break
+            else:
+                nuevaGen[r].cambioAcomodo(lista2[i].cruce(lista2[(k)].getAcomodo()),nodos)
+                k+=1
+                r+=1
+                cont+=1
+                if cont>=25:
+                    break
+            i+=1
+        i+=3
+    
+    k=0
+    i=0
+    cont=0
+    while cont<25:
+        for n in range (0,4):
+            if (i<=45):
+                nuevaGen[r].cambioAcomodo(lista2[i].cruce(lista2[(i+4)].getAcomodo()),nodos)
+                r+=1
+                cont+=1
+                if cont>=25:
+                    break
+            else:
+                nuevaGen[r].cambioAcomodo(lista2[i].cruce(lista2[(k)].getAcomodo()),nodos)
+                k+=1
+                r+=1
+                cont+=1
+                if cont>=25:
+                    break
+            i+=1
+        i+=4
+
+    
+
+    file.write("\n")
+    #nuevaGen = sorted(nuevaGen, key=lambda nodo: nodo.distancia)
+    i=0
+    file.write("sin ordenar-----------------------------------------\n")
+    while (i<100):
+        nuevaGen[i].cromosoma=i+1
+        nuevaGen[i].generacion=nuevaGen[i].generacion+1
+        #print(str(nuevaGen[i].printOrden(1))+" "+str(nuevaGen[i].getDist()))
+        file.write("{:<15} {:<15} {:<100} {:<150}".format(str(nuevaGen[i].generacion),str(nuevaGen[i].cromosoma),str(nuevaGen[i].printOrden(1)),str(nuevaGen[i].getDist())))
+        file.write("\n")
+        #nuevaGen[i].cambioAcomodo(lista2[uno[i]].cruce(lista2[dos[i]].getAcomodo()),nodos)
+        #print(str(i)+" orden: "+str(nuevaGen[i].printOrden(1))+" --distancia-- "+str(nuevaGen[i].getDist()))
+        i+=1
+
+    file.write("\n")
+    #ordenacion de nueva generacion
+    nuevaGen = sorted(nuevaGen, key=lambda nodo: nodo.distancia)
+    i=0
+    file.write("ordenados-----------------------------------------\n")
+    while (i<100):
+        #print(str(nuevaGen[i].printOrden(1))+" "+str(nuevaGen[i].getDist()))
+        file.write("{:<15} {:<15} {:<100} {:<150}".format(str(nuevaGen[i].generacion),str(nuevaGen[i].cromosoma),str(nuevaGen[i].printOrden(1)),str(nuevaGen[i].getDist())))
+        file.write("\n")
+        i+=1
+    nuevaGen[0].mutacion(4,9)
+    lista2=[]
+    i=0
+    while (i<50):
+        lista2.append(nuevaGen[i])
+        i+=1
+    w+=1
+
+
 
 #print(uno)
 #print(dos)
